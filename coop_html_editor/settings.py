@@ -2,6 +2,7 @@
 """centralize settings"""
 
 from django.conf import settings as project_settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 
 
@@ -10,9 +11,25 @@ def get_field_prefix():
     return "html_editor"
 
 
+def get_html_editor():
+    """return the name of the editor to use: aloha or ck-editor"""
+    editor_name = getattr(project_settings, 'COOP_HTML_EDITOR', "aloha")
+    supported_editors = ('aloha', 'ck-editor')
+    if editor_name not in supported_editors:
+        raise ImproperlyConfigured(
+            u'Unknown editor {0}. Allowed choices: {1}'.format(editor_name, supported_editors)
+        )
+    return editor_name
+
+
 def aloha_version():
     """return settings or default"""
     return getattr(project_settings, 'ALOHA_VERSION', "aloha.0.23.26")
+
+
+def ckeditor_version():
+    """return settings or default"""
+    return getattr(project_settings, 'CKEDITOR_VERSION', "ckeditor.4.5.10")
 
 
 def init_js_template():

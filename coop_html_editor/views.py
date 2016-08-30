@@ -20,17 +20,30 @@ def html_editor_init(request):
         if model:
             links.extend(model.objects.all())
 
+    editors_config = {
+        'aloha': {
+            'jquery_no_conflict': settings.jquery_no_conflict(),
+            'sidebar_disabled': 'true' if settings.sidebar_disabled() else 'false',
+            'css_classes': settings.css_classes(),
+            'resize_disabled': settings.resize_disabled(),
+        },
+        'ck-editor': {
+            'jquery_no_conflict': settings.jquery_no_conflict(),
+            'sidebar_disabled': 'true' if settings.sidebar_disabled() else 'false',
+            'css_classes': settings.css_classes(),
+            'resize_disabled': settings.resize_disabled(),
+        }
+    }
+
+    editor_name = settings.get_html_editor()
+    editor_config = editors_config.get(editor_name, None)
+
     return render(
         request,
         settings.init_js_template(),
         {
             'links': links,
-            'config': {
-                'jquery_no_conflict': settings.jquery_no_conflict(),
-                'sidebar_disabled': 'true' if settings.sidebar_disabled() else 'false',
-                'css_classes': settings.css_classes(),
-                'resize_disabled': settings.resize_disabled(),
-            },
+            'config': editor_config,
         },
         content_type='text/javascript'
     )
