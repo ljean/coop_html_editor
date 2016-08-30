@@ -9,6 +9,7 @@ def get_field_prefix():
     """return the prefix to use in form field names"""
     return "html_editor"
 
+
 def aloha_version():
     """return settings or default"""
     return getattr(project_settings, 'ALOHA_VERSION', "aloha.0.23.26")
