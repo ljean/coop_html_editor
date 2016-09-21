@@ -29,7 +29,7 @@ def aloha_version():
 
 def ckeditor_version():
     """return settings or default"""
-    return getattr(project_settings, 'CKEDITOR_VERSION', "ckeditor.4.5.10")
+    return getattr(project_settings, 'CKEDITOR_VERSION', "ckeditor.4.5.11")
 
 
 def init_js_template():
