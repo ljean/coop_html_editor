@@ -19,16 +19,30 @@ var adaptDroppedElement = function () {
     });
 };
 
+/*** CONFIG
+{{ config }}
+*/
 var saveInlineEditorData = function(editorId, editorElt) {
     var data = editorElt.getData();
     $('#' + editorId + '_hidden').attr('value', data);
 };
 
 $(document).ready(function() {
+    CKEDITOR.stylesSet.add( 'cms_styles', [
+        //{ name: 'Highlight', element: 'span', attributes: { 'class': 'highlight' } },
+        //{ name: 'Red Title',  element: 'h3', styles: { color: '#880000' } },
+        {% for style in config.css_classes %}
+        {{ style|safe }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]);
+
     $('.inline-editable').attr('contenteditable', 'true');
     $('.inline-editable').each(function(index, elt) {
         var editorId = $(elt).attr('id');
         CKEDITOR.inline(editorId, {
+            customConfig: '{% url "ckeditor_config" %}',
+            filebrowserBrowseUrl: '{% url "browser_urls" %}',
+            filebrowserImageBrowseUrl: '{% url "browser_images" %}',
             on: {
                 change: function( event ) {
                     saveInlineEditorData(editorId, event.editor);
@@ -41,5 +55,7 @@ $(document).ready(function() {
                 }
             }
         });
+      
+
     });
 });

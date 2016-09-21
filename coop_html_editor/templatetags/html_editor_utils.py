@@ -46,7 +46,7 @@ class InlineHtmlEditNode(template.Node):
     
     def _resolve_arg(self, value, context):
         """return associated form"""
-        value = unicode(value)
+        value = u"{0}".format(value)
         new_value = value.strip('"').strip("'")
         if len(value)-2 == len(new_value):
             return new_value

@@ -34,12 +34,18 @@ def ckeditor_version():
 
 def init_js_template():
     """return settings or default"""
-    return getattr(project_settings, 'ALOHA_INIT_JS_TEMPLATE', "html_editor/aloha_init.js")
+    if get_html_editor() == 'ck-editor':
+        return getattr(project_settings, 'CKEDITOR_INIT_JS_TEMPLATE', "html_editor/ckeditor-init.js")
+    else:
+        return getattr(project_settings, 'ALOHA_INIT_JS_TEMPLATE', "html_editor/aloha_init.js")
 
 
 def init_url():
     """return settings or default"""
-    return getattr(project_settings, 'ALOHA_INIT_URL', None) or reverse('html_editor_init')
+    url = getattr(project_settings, 'COOP_HTML_EDITOR_INIT_URL', None)
+    if not url:
+        url = getattr(project_settings, 'ALOHA_INIT_URL', None)
+    return url or reverse('html_editor_init')
 
 
 def plugins():
@@ -100,8 +106,16 @@ def sidebar_disabled():
 
 def css_classes():
     """return settings or default"""
-    return getattr(project_settings, 'ALOHA_CSS_CLASSES', ())
-    
+    if get_html_editor() == 'ck-editor':
+        # Example
+        # CKEDITOR_CSS_CLASSES = [
+        #     "{name: 'Highlight', element: 'span', attributes: {'class': 'highlight'}}",
+        #     "{name: 'Red Title', element: 'h3', styles: {color: '#880000'}}",
+        # ]
+        return getattr(project_settings, 'CKEDITOR_CSS_CLASSES', [])
+    else:
+        return getattr(project_settings, 'ALOHA_CSS_CLASSES', ())
+
 
 def resize_disabled():
     """return settings or default"""

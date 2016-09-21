@@ -59,6 +59,8 @@ class CkEditorInput(InlineHtmlInput):
         return code for inserting required js and css files
         need aloha , plugins and initialization
         """
+        aloha_init_url = settings.init_url()
+
         try:
             css = {
                 'all': (
@@ -68,7 +70,8 @@ class CkEditorInput(InlineHtmlInput):
 
             js_files = [
                 '{0}/ckeditor.js'.format(settings.ckeditor_version()),
-                'html-editor/js/ckeditor-init.js'
+                aloha_init_url,
+                #'html-editor/js/ckeditor-init.js'
             ]
 
             return Media(css=css, js=js_files)
