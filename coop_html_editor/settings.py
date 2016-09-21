@@ -96,7 +96,7 @@ def jquery_no_conflict():
 
 def link_models():
     """return settings or default"""
-    return getattr(project_settings, 'COOP_HTML_EDITOR_LINK_MODELS', ())
+    return getattr(project_settings, 'HTML_EDITOR_LINK_MODELS', ())
     
 
 def sidebar_disabled():

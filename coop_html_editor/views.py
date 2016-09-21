@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 """view for aloha editor"""
 
-import json
-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.conf import settings as project_settings
 
 from . import settings
 from .utils import get_model
@@ -50,17 +48,21 @@ def html_editor_init(request):
 
 
 def ckeditor_config(request):
+    """returns the main config file"""
     return render(
         request,
         'html_editor/ckeditor_config.js',
-        {
-
-        },
+        {},
         content_type='text/javascript'
     )
 
 
 def browser_urls(request):
+    """display link browser"""
+
+    jquery_url = u'{0}{1}/adapters/jquery.js'.format(
+        project_settings.STATIC_URL, settings.ckeditor_version()
+    )
 
     links = []
     for full_model_name in settings.link_models():
@@ -69,47 +71,18 @@ def browser_urls(request):
         if model:
             links.extend(model.objects.all())
 
-            """
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Example: Browsing Files</title>
-    <script>
-        // Helper function to get parameters from the query string.
-        function getUrlParam( paramName ) {
-            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
-            var match = window.location.search.match( reParam );
-
-            return ( match && match.length > 1 ) ? match[1] : null;
-        }
-        // Simulate user action of selecting a file to be returned to CKEditor.
-        function returnFileUrl() {
-
-            var funcNum = getUrlParam( 'CKEditorFuncNum' );
-            var fileUrl = '/path/to/file.txt';
-            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
-            window.close();
-        }
-    </script>
-</head>
-<body>
-    <button onclick="returnFileUrl()">Select File</button>
-</body>
-</html>
-            """
-
-            #window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl[, data] );
-
-    return HttpResponse(json.dumps(links), content_type='text/javascript')
+    return render(
+        request,
+        'html_editor/link_browser.html',
+        {'links': links, 'jquery_url': jquery_url, }
+    )
 
 
 def browser_images(request):
+    """display image browser"""
+    images = []
     return render(
         request,
-        'html_editor/ckeditor_config.js',
-        {
-
-        },
-        content_type='text/javascript'
+        'html_editor/image_browser.html',
+        {'images': images}
     )
