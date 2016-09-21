@@ -1,6 +1,12 @@
 CKEDITOR.disableAutoInline = true;
- 
+
+/**
+ *
+ * Transform images and document links when dropped in editor from media-library
+ *
+ */
 var adaptDroppedElement = function () {
+    console.log('>>>>' + $(".inline-editable img.library-thumbnail").length);
     $(".inline-editable img.library-thumbnail").each(function(idx, elt) {
       $(elt).removeClass("library-thumbnail");
       $(elt).attr("src", $(elt).attr("rel"));
@@ -19,14 +25,21 @@ var adaptDroppedElement = function () {
     });
 };
 
-/*** CONFIG
-{{ config }}
-*/
+/**
+ *
+ * Save the editor content in form field
+ *
+ */
 var saveInlineEditorData = function(editorId, editorElt) {
     var data = editorElt.getData();
     $('#' + editorId + '_hidden').attr('value', data);
 };
 
+/**
+ *
+ * Editor ready
+ *
+ */
 $(document).ready(function() {
     CKEDITOR.stylesSet.add( 'cms_styles', [
         //{ name: 'Highlight', element: 'span', attributes: { 'class': 'highlight' } },
@@ -35,7 +48,6 @@ $(document).ready(function() {
         {{ style|safe }}{% if not forloop.last %},{% endif %}
         {% endfor %}
     ]);
-
     $('.inline-editable').attr('contenteditable', 'true');
     $('.inline-editable').each(function(index, elt) {
         var editorId = $(elt).attr('id');
@@ -55,7 +67,5 @@ $(document).ready(function() {
                 }
             }
         });
-      
-
     });
 });

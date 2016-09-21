@@ -60,10 +60,6 @@ def ckeditor_config(request):
 def browser_urls(request):
     """display link browser"""
 
-    jquery_url = u'{0}{1}/adapters/jquery.js'.format(
-        project_settings.STATIC_URL, settings.ckeditor_version()
-    )
-
     links = []
     for full_model_name in settings.link_models():
         app_name, model_name = full_model_name.split('.')
@@ -74,13 +70,20 @@ def browser_urls(request):
     return render(
         request,
         'html_editor/link_browser.html',
-        {'links': links, 'jquery_url': jquery_url, }
+        {'links': links}
     )
 
 
 def browser_images(request):
     """display image browser"""
+
     images = []
+    for full_model_name in settings.image_models():
+        app_name, model_name = full_model_name.split('.')
+        model = get_model(app_name, model_name)
+        if model:
+            images.extend(model.objects.all())
+
     return render(
         request,
         'html_editor/image_browser.html',

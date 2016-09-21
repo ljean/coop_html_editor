@@ -97,7 +97,12 @@ def jquery_no_conflict():
 def link_models():
     """return settings or default"""
     return getattr(project_settings, 'HTML_EDITOR_LINK_MODELS', ())
-    
+
+
+def image_models():
+    """return settings or default"""
+    return getattr(project_settings, 'HTML_EDITOR_IMAGE_MODELS', ())
+
 
 def sidebar_disabled():
     """return settings or default"""

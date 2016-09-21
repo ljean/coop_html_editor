@@ -2,7 +2,7 @@
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% trans "Select link" %}</title>
+    <title>{% trans "Select image" %}</title>
     <script>
         // Helper function to get parameters from the query string.
         function getUrlParam( paramName ) {
@@ -50,17 +50,17 @@
 <body>
     <div class="container">
       <div class="row">
-        <h3>{% trans "List of links" %}</h3>
+        <h3>{% trans "List of images" %}</h3>
         <select id="links-list" class="form-control">
           <option value=""></option>
-          {% for link in links %}
-          <option value="{{ link.get_absolute_url }}">{{ link }} - {{ link.get_absolute_url }}</option>
+          {% for image in images %}
+          <option value="{{ image.get_absolute_url }}">{{ image }} - {{ image.get_absolute_url }}</option>
           {% endfor %}
         </select>
       </div>
       <div class="row">
         <button class="btn" onclick="window.close()">{% trans "Close" %}</button>
-        <button class="btn btn-primary" onclick="returnFileUrl()">{% trans "Select link" %}</button>
+        <button class="btn btn-primary" onclick="returnFileUrl()">{% trans "Select image" %}</button>
       </div>
     </div>
 </body>
