@@ -6,7 +6,7 @@ CKEDITOR.disableAutoInline = true;
  *
  */
 var adaptDroppedElement = function () {
-    console.log('>>>>' + $(".inline-editable img.library-thumbnail").length);
+    //console.log('>>>>' + $(".inline-editable img.library-thumbnail").length);
     $(".inline-editable img.library-thumbnail").each(function(idx, elt) {
       $(elt).removeClass("library-thumbnail");
       $(elt).attr("src", $(elt).attr("rel"));
@@ -42,8 +42,6 @@ var saveInlineEditorData = function(editorId, editorElt) {
  */
 $(document).ready(function() {
     CKEDITOR.stylesSet.add( 'cms_styles', [
-        //{ name: 'Highlight', element: 'span', attributes: { 'class': 'highlight' } },
-        //{ name: 'Red Title',  element: 'h3', styles: { color: '#880000' } },
         {% for style in config.css_classes %}
         {{ style|safe }}{% if not forloop.last %},{% endif %}
         {% endfor %}
