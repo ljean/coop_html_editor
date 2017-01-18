@@ -1,5 +1,5 @@
 /**
- * @license Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2017, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
@@ -20,9 +20,9 @@ CKEDITOR.editorConfig = function( config ) {
 		{ name: 'others' },
 		'/',
 		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-		{ name: 'align' },
-    { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'bidi' ] },
+		{ name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
 		{ name: 'styles' },
+		{ name: 'colors' },
 		{ name: 'about' }
 	];
 
@@ -31,14 +31,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeButtons = 'Underline,Subscript,Superscript';
 
 	// Set the most common block elements.
-	config.format_tags = 'p;h1;h2;h3;h4;h5;pre';
+	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
-
-	config.stylesSet = 'cms_styles';
-
-	config.extraAllowedContent = 'img[*](*)';
-
 };
-
