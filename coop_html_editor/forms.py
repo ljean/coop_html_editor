@@ -11,6 +11,7 @@ from .widgets import get_inline_html_widget
 
 class InlineHtmlForm(forms.Form):
     """Base class for form with inline html editor editor"""
+    is_inline_editable = True
 
     def __init__(self, model_class, lookup, field_name, data=None, field_value=None, *args, **kwargs):
         super(InlineHtmlForm, self).__init__(data, *args, **kwargs)
@@ -23,7 +24,7 @@ class InlineHtmlForm(forms.Form):
             (model_class.__module__.split('.')[-2], model_class.__name__)
         )
         
-        lookup_str = "__".join([key + "__" + unicode(value).strip('"\'') for (key, value) in lookup.items()])
+        lookup_str = "__".join([key + "__" + u'{0}'.format(value).strip('"\'') for (key, value) in lookup.items()])
         
         self._form_field = "__".join(
             (get_field_prefix(), model_name, lookup_str, field_name)
