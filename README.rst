@@ -3,11 +3,11 @@ coop HTML Editor
 
 * `What is coop_html_editor good for?`_
 * `Quick start`_
-* `Options`_
+* `Settings`_
 
 .. _What is coop_html_editor good for?: #good-for
 .. _Quick start?: #quick-start
-.. _Options?: #options
+.. _Settings?: #settings
 
 .. _good-for:
 
@@ -43,10 +43,39 @@ Then create a form. For example something like ::
 Let's assume that you've a ``form`` variable pointing on an instance of a NoteForm.
 In the template file, call the form and don't forget to put ``{{form.media}}`` in the headers.
 
-.. _options:
+.. _settings:
 
-Options
+Settings
 ------------------------------------
+
+The following constants can be set in your django project settings.py
+
+You can choose between 2 HTML editors : Aloha editor or CkEditor. We recommend to use CkEditor but keep Aloha by default
+for compatibility. Add one the 2 lines below in your settings.py
+
+    COOP_HTML_EDITOR = 'aloha'
+    COOP_HTML_EDITOR = 'ck-editor'
+
+You can tune your editor by changing the settings below. The values in this README correspond to defaults
+
+For both, we package a default version than can be overriden by copying your own version folder in ste static files
+and define the new version by
+
+    ALOHA_VERSION = "aloha.0.23.26"
+    CKEDITOR_VERSION = "ckeditor.4.6.2"
+
+The initialisation code of the editor is set in a javascript file. You can change the file to use by seetings
+
+    ALOHA_INIT_JS_TEMPLATE = "html_editor/aloha_init.js"
+    CKEDITOR_INIT_JS_TEMPLATE = "html_editor/ckeditor-init.js"
+
+If you choose CkEditor, you can add your own styles
+
+    CKEDITOR_CSS_CLASSES = [
+         "{name: 'Highlight', element: 'span', attributes: {'class': 'highlight'}}",
+         "{name: 'Red Title', element: 'h3', styles: {color: '#880000'}}",
+    ]
+
 
 InlineHtmlInput has a "provider" that allows you to add local links to your models (articles, contacts, whatever) easily, through an autocomplete field that will search for objects based on rules you defined for each model :
 
@@ -90,7 +119,7 @@ Please note that the ``ALOHA_PLUGINS`` setting is a global setting. If you need 
 can pass a similar tuple in the ``aloha_plugins`` attribute of your ``coop_html_editor`` widget.
 The ``extra_aloha_plugins`` attribute will add additional plugins to the default set.
 
-``HTML_EDITOR_INIT_URL`` setting make possible to overloaf the aloha init file of djaloha.
+``HTML_EDITOR_INIT_URL`` setting make possible to overload the aloha init file of djaloha.
 ``html_editor_init_url`` attribute of ``InlineHtmlInput`` can also be used to overload it for a specific form field.
 
 License
