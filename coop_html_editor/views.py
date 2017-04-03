@@ -30,6 +30,7 @@ def html_editor_init(request):
         },
         'ck-editor': {
             'css_classes': settings.css_classes(),
+            'image_default_class': settings.image_default_class(),
         }
     }
 

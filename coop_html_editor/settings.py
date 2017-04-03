@@ -122,6 +122,11 @@ def css_classes():
         return getattr(project_settings, 'ALOHA_CSS_CLASSES', ())
 
 
+def image_default_class():
+    if get_html_editor() == 'ck-editor':
+        return getattr(project_settings, 'CKEDITOR_IMAGE_DEFAULT_CLASS', '')
+
+
 def resize_disabled():
     """return settings or default"""
     return getattr(project_settings, 'ALOHA_RESIZE_DISABLED', False)
