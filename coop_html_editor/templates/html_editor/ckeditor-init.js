@@ -6,15 +6,20 @@ CKEDITOR.disableAutoInline = true;
  *
  */
 var adaptDroppedElement = function () {
-    //console.log('>>>>' + $(".inline-editable img.library-thumbnail").length);
-    $(".inline-editable img.library-thumbnail").each(function(idx, elt) {
+
+    $(".inline-editable img[data-class=library-thumbnail]").each(function(idx, elt) {
       $(elt).removeClass("library-thumbnail");
+      $(elt).removeAttr("data-class");
       $(elt).attr("src", $(elt).attr("rel"));
       $(elt).attr("data-cke-saved-src", $(elt).attr("rel"));
       $(elt).removeAttr('rel');
+      {% if config.image_default_class %}
+      $(elt).addClass('{{ config.image_default_class }}');
+      {% endif %}
     });
 
-    $(".inline-editable img.library-document").each(function(idx, elt) {
+    $(".inline-editable img[data-class=library-document]").each(function(idx, elt) {
+      $(elt).removeAttr("data-class");
       var doc_url = $(elt).attr('rel');
       var doc_title = $(elt).attr('title');
       var icon_url = $(elt).attr('src');
