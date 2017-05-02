@@ -3,7 +3,7 @@
 
 from django import VERSION
 
-if VERSION >= (1, 9, 0):
+if VERSION >= (1, 8, 0):
     from django.apps import apps
     get_model = apps.get_model
 else:

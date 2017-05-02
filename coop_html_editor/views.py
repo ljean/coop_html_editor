@@ -2,7 +2,6 @@
 """view for aloha editor"""
 
 from django.shortcuts import render
-from django.conf import settings as project_settings
 
 from . import settings
 from .utils import get_model
