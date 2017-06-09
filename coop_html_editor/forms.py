@@ -3,7 +3,7 @@
 
 from django.utils.encoding import smart_text
 
-import floppyforms as forms
+import floppyforms.__future__ as forms
 
 from .settings import get_field_prefix
 from .widgets import get_inline_html_widget

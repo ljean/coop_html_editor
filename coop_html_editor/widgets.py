@@ -6,7 +6,7 @@ import logging
 
 from django.forms import Media
 
-from floppyforms.widgets import TextInput
+import floppyforms.__future__ as floppyforms
 
 from . import settings
 
@@ -21,7 +21,7 @@ def get_inline_html_widget():
     return input_class()
 
 
-class InlineHtmlInput(TextInput):
+class InlineHtmlInput(floppyforms.widgets.TextInput):
     """Base class for Inline HtmlInput"""
     clean_value_callbacks = []
 

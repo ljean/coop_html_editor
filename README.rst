@@ -27,7 +27,7 @@ In urls.py add ``(r'^html-editor/', include('coop_html_editor.urls'))`` to your 
 
 Then create a form. For example something like ::
 
-    import floppyforms
+    import floppyforms.__future__ as floppyforms
     from models import Note
     from coop_html_editor.widgets import InlineHtmlInput
     
