@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """form base classes for integration"""
 
-from django.utils.encoding import smart_unicode
+from django.utils.encoding import smart_text
 
 import floppyforms as forms
 
@@ -41,7 +41,7 @@ class InlineHtmlForm(forms.Form):
 
     def save(self):
         """save associated object"""
-        value = smart_unicode(self.cleaned_data[self._form_field])
+        value = smart_text(self.cleaned_data[self._form_field])
         obj = self._model_class.objects.get_or_create(**self._lookup)[0]
         setattr(obj, self._field_name, value)
         obj.save()
