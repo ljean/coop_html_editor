@@ -29,14 +29,14 @@ Then create a form. For example something like ::
 
     import floppyforms
     from models import Note
-    from coop_html_editor.widgets import InlineHtmlInput
+    from coop_html_editor.widgets import get_inline_html_widget
     
     class NoteForm(floppyforms.ModelForm):
         class Meta:
             model = Note
             fields = ('text',)
             widgets = {
-                'text': InlineHtmlInput(),
+                'text': get_inline_html_widget(),
             }
 
 

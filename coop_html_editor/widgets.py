@@ -21,19 +21,19 @@ def get_inline_html_widget():
     return input_class()
 
 
-class InlineHtmlInput(TextInput):
+class BaseInlineHtmlInput(TextInput):
     """Base class for Inline HtmlInput"""
     clean_value_callbacks = []
 
     def get_context(self, *args, **kwargs):
         """get context"""
-        context = super(InlineHtmlInput, self).get_context(*args, **kwargs)
+        context = super(BaseInlineHtmlInput, self).get_context(*args, **kwargs)
         context.update({'field_prefix': settings.get_field_prefix()})
         return context
 
     def value_from_datadict(self, data, files, name):
         """return value"""
-        value = super(InlineHtmlInput, self).value_from_datadict(data, files, name)
+        value = super(BaseInlineHtmlInput, self).value_from_datadict(data, files, name)
         return self.clean_value(value)
 
     def clean_value(self, origin_value):
@@ -45,7 +45,7 @@ class InlineHtmlInput(TextInput):
         return return_value
 
 
-class CkEditorInput(InlineHtmlInput):
+class CkEditorInput(BaseInlineHtmlInput):
     """
     Text widget with CK-Editor html editor
     requires floppyforms to be installed
@@ -80,7 +80,7 @@ class CkEditorInput(InlineHtmlInput):
             django_logger.error(u'CkEditorInput._get_media Error {0}'.format(msg))
 
 
-class AlohaInput(InlineHtmlInput):
+class AlohaInput(BaseInlineHtmlInput):
     """
     Text widget with aloha html editor
     requires floppyforms to be installed
