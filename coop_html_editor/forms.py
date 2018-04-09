@@ -10,7 +10,7 @@ from .widgets import get_inline_html_widget
 
 
 class InlineHtmlForm(forms.Form):
-    """Base class for form with inline html editor editor"""
+    """Base class for form with inline html editor"""
     is_inline_editable = True
 
     def __init__(self, model_class, lookup, field_name, data=None, field_value=None, *args, **kwargs):

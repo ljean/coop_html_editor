@@ -13,7 +13,7 @@ setup(
     name='coop_html_editor',
     version=VERSION,
     description='integration for Inline HTML editor',
-    packages=['coop_html_editor', 'coop_html_editor.templatetags'],
+    packages=find_packages(),
     include_package_data=True,
     author='Luc Jean',
     author_email='ljean@apidev.fr',
