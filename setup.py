@@ -22,5 +22,9 @@ setup(
     url="https://github.com/ljean/coop_html_editor/",
     download_url="https://github.com/ljean/coop_html_editor/tarball/master",
     zip_safe=False,
-    install_requires=['django-floppyforms', ]
+    install_requires=['django-floppyforms', ],
+    dependency_links=[
+        # fixed version
+        'git+https://github.com/ljean/django-floppyforms.git#egg=django-floppyforms'
+    ],
 )
