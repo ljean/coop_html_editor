@@ -39,5 +39,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.extraAllowedContent = 'img[*](*);video[*](*);video source[*](*)';
 
+	config.extraPlugins = 'videoembed';
+
 };
 
