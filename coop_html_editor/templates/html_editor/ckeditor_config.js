@@ -30,7 +30,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// Set the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;h4;h5;pre';
 
-	config.extraPlugins = 'sourcedialog,embed,btgrid';
+	config.extraPlugins = 'sourcedialog,embed,btgrid,videoembed';
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
@@ -38,8 +38,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.stylesSet = 'cms_styles';
 
 	config.extraAllowedContent = 'img[*](*);video[*](*);video source[*](*)';
-
-	config.extraPlugins = 'videoembed';
 
 };
 
