@@ -67,12 +67,20 @@ def browser_urls(request):
         app_name, model_name = full_model_name.split('.')
         model = get_model(app_name, model_name)
         if model:
-            links.extend(model.objects.all())
+            links.extend(model.objects.all().order_by("-id"))
+
+    page_obj = paginate(request, links, 10)
+    
+    context = {
+        'links': links,
+        'page_links': list(page_obj),
+        'page_obj': page_obj
+    }
 
     return render(
         request,
         'html_editor/link_browser.html',
-        {'links': links}
+        context
     )
 
 
