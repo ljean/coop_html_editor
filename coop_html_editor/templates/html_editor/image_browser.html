@@ -1,8 +1,11 @@
 <!DOCTYPE html>{% load i18n %}
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
+	{% load i18n static coop_navigation coop_utils coop_bar_tags coop_bs coop_edition thumbnail %}
     <meta charset="UTF-8">
     <title>{% trans "Select image" %}</title>
+	<script src="{% static 'js/jquery-1.7.2.js' %}" type="text/javascript"></script>
+	<link rel="stylesheet" href="{% versioned_static_file 'bs/css/bootstrap.css' %}" type="text/css" />
     <script>
         // Helper function to get parameters from the query string.
         function getUrlParam( paramName ) {
@@ -15,7 +18,7 @@
         function returnFileUrl() {
 
             var funcNum = getUrlParam('CKEditorFuncNum');
-            var fileUrl = document.getElementById('links-list').value;
+            var fileUrl = document.getElementById('img-selected').src;
             window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
             window.close();
         }
@@ -45,19 +48,43 @@
         color: #fff;
         background: #5b9acf;
       }
+		.selected
+		{
+			border: 2px solid orange;
+		}
+
+		.disable:focus
+		{
+			text-decoration: none;
+			outline: none;
+		}
+		.pagination
+		{
+			margin-left: -15px;
+		}
     </style>
 </head>
 <body>
     <div class="container">
       <div class="row">
         <h3>{% trans "List of images" %}</h3>
-        <select id="links-list" class="form-control">
-          <option value=""></option>
-          {% for image in images %}
-          <option value="{{ image.get_absolute_url }}">{{ image }} - {{ image.get_absolute_url }}</option>
+          {% for image in page_images %}
+			  <a class="disable" href>
+				  <img width="300" class="img-selected" src="{{ image.get_absolute_url }}" />
+			  </a>
           {% endfor %}
-        </select>
       </div>
+	<script type="text/javascript">
+		$('a.disable').click(function(){
+		    return false;
+		});
+
+		$('img.img-selected').on("click", function() {
+		    $('img.img-selected').removeClass('selected').removeAttr('id');
+		    $(this).addClass('selected').attr('id', 'img-selected');
+		})
+	</script>
+	{% include "coop_cms/_pagination.html" with page=images pages=pages %}
       <div class="row">
         <button class="btn" onclick="window.close()">{% trans "Close" %}</button>
         <button class="btn btn-primary" onclick="returnFileUrl()">{% trans "Select image" %}</button>

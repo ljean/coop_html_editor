@@ -6,6 +6,8 @@ from django.shortcuts import render
 from . import settings
 from .utils import get_model
 
+from coop_cms.utils import paginate
+
 
 def html_editor_init(request):
     """
@@ -65,12 +67,20 @@ def browser_urls(request):
         app_name, model_name = full_model_name.split('.')
         model = get_model(app_name, model_name)
         if model:
-            links.extend(model.objects.all())
+            links.extend(model.objects.all().order_by("-id"))
+
+    page_obj = paginate(request, links, 10)
+    
+    context = {
+        'links': links,
+        'page_links': list(page_obj),
+        'page_obj': page_obj
+    }
 
     return render(
         request,
         'html_editor/link_browser.html',
-        {'links': links}
+        context
     )
 
 
@@ -82,10 +92,18 @@ def browser_images(request):
         app_name, model_name = full_model_name.split('.')
         model = get_model(app_name, model_name)
         if model:
-            images.extend(model.objects.all())
+            images.extend(model.objects.all().order_by("-id"))
+
+    page_obj = paginate(request, images, 20)
+    
+    context = {
+        'images': images,
+        'page_images': list(page_obj),
+        'page_obj': page_obj
+    }
 
     return render(
         request,
         'html_editor/image_browser.html',
-        {'images': images}
+        context
     )
