@@ -3,7 +3,10 @@
 
 from django.conf import settings as project_settings
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 
 def get_field_prefix():
