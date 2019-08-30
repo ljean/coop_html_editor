@@ -53,6 +53,8 @@ The following constants can be set in your django project settings.py
 You can choose between 2 HTML editors : Aloha editor or CkEditor. We recommend to use CkEditor but keep Aloha by default
 for compatibility. Add one the 2 lines below in your settings.py
 
+In settings::
+
     COOP_HTML_EDITOR = 'aloha'
     COOP_HTML_EDITOR = 'ck-editor'
 
@@ -61,15 +63,21 @@ You can tune your editor by changing the settings below. The values in this READ
 For both, we package a default version than can be overriden by copying your own version folder in ste static files
 and define the new version by
 
+In settings::
+
     ALOHA_VERSION = "aloha.0.23.26"
     CKEDITOR_VERSION = "ckeditor.4.6.2"
 
 The initialisation code of the editor is set in a javascript file. You can change the file to use by seetings
 
+In settings::
+
     ALOHA_INIT_JS_TEMPLATE = "html_editor/aloha_init.js"
     CKEDITOR_INIT_JS_TEMPLATE = "html_editor/ckeditor-init.js"
 
 If you choose CkEditor, you can add your own styles
+
+In settings::
 
     CKEDITOR_CSS_CLASSES = [
          "{name: 'Highlight', element: 'span', attributes: {'class': 'highlight'}}",
