@@ -7,7 +7,6 @@
        var maxGridColumns = 12;
        var lang = editor.lang.btgrid;
 
-       console.log('>btgrid');
        CKEDITOR.dialog.add('btgrid',  this.path + 'dialogs/btgrid.js');
 
        editor.addContentsCss( this.path + 'styles/editor.css');
