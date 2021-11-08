@@ -37,7 +37,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	config.stylesSet = 'cms_styles';
 
-	config.extraAllowedContent = 'img[*](*);video[*](*);video source[*](*)';
-
+	config.extraAllowedContent = 'i[*](*);img[*](*);video[*](*);video source[*](*)';
+	config.allowedContent = true;
 };
 

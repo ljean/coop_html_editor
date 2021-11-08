@@ -1,5 +1,5 @@
 CKEDITOR.disableAutoInline = true;
-
+CKEDITOR.dtd.$removeEmpty.i = 0;
 /**
  *
  * Transform images and document links when dropped in editor from media-library
