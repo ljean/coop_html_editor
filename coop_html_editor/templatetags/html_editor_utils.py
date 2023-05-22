@@ -2,9 +2,9 @@
 """template tags"""
 
 from django import template
+from django.apps import apps
 
 from ..forms import InlineHtmlForm
-from ..utils import get_model
 
 
 register = template.Library()
@@ -148,7 +148,7 @@ def get_html_editor_args(parser, token):
     field_name = token.split_contents()[3]
 
     app_name, model_name = full_model_name.split('.')
-    model_class = get_model(app_name, model_name)
+    model_class = apps.get_model(app_name, model_name)
 
     lookup = {}
     for lookup_item in lookups:

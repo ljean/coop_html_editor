@@ -4,7 +4,7 @@
 from django.shortcuts import render
 
 from . import settings
-from .utils import get_model
+from django.apps import apps
 
 from coop_cms.utils import paginate
 
@@ -18,17 +18,11 @@ def html_editor_init(request):
     links = []
     for full_model_name in settings.link_models():
         app_name, model_name = full_model_name.split('.')
-        model = get_model(app_name, model_name)
+        model = apps.get_model(app_name, model_name)
         if model:
             links.extend(model.objects.all())
 
     editors_config = {
-        'aloha': {
-            'jquery_no_conflict': settings.jquery_no_conflict(),
-            'sidebar_disabled': 'true' if settings.sidebar_disabled() else 'false',
-            'css_classes': settings.css_classes(),
-            'resize_disabled': settings.resize_disabled(),
-        },
         'ck-editor': {
             'css_classes': settings.css_classes(),
             'image_default_class': settings.image_default_class(),
@@ -65,7 +59,7 @@ def browser_urls(request):
     links = []
     for full_model_name in settings.link_models():
         app_name, model_name = full_model_name.split('.')
-        model = get_model(app_name, model_name)
+        model = apps.get_model(app_name, model_name)
         if model:
             links.extend(model.objects.all().order_by("-id"))
 
@@ -90,7 +84,7 @@ def browser_images(request):
     images = []
     for full_model_name in settings.image_models():
         app_name, model_name = full_model_name.split('.')
-        model = get_model(app_name, model_name)
+        model = apps.get_model(app_name, model_name)
         if model:
             images.extend(model.objects.all().order_by("-id"))
 

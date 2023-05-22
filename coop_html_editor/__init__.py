@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """coop_html_editor : use Inline Html Editor in Django project"""
 
-VERSION = (1, 3, 1)
+VERSION = (1, 4, 1)
 
 
 def get_version():
